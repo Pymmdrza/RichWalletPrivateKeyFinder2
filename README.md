@@ -22,9 +22,9 @@ pip install colorama
 
 After install Run Program With This Common On Terminal or Consol (`richeth.py`)
 ```
-python richeth.py
+python reth.py
 ```
 Linux :
 ```
-python3 richeth.py
+python3 reth.py
 ```
