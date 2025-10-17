@@ -1,9 +1,9 @@
-from hdwallet import HDWallet
-from hdwallet.symbols import ETH as SYMBOL
-from hexer import mHash
+from libcrypto import Wallet
 from colorama import Fore, Style
 import multiprocessing
 from multiprocessing import Pool
+import random
+import string
 
 # =========================================================================================
 mmdrza = '''
@@ -13,20 +13,22 @@ mmdrza = '''
              ||- ╩ ╩╩ ╩═╩╝╩╚═╚═╝╩ ╩o╚═╝╚═╝╩ ╩ -||-    @@@@@@@@ @@@@@@@ @@@  @@@      -||
              ||--------------------------------||-    @@!        @@!   @@!  @@@      -||
              ||-| WebSite : Mmdrza.Com        -||-    @!!!:!     @!!   @!@!@!@!      -||
-             ||-| Mail : X4@Mmdrza.Com        -||-    !!:        !!:   !!:  !!!      -||
-             ||-| DEV.to/Mmdrza               -||-    : :: :::    :     :   : :      -||
+             ||-| Mail : Pymmdrza@gmail.com   -||-    !!:        !!:   !!:  !!!      -||
+             ||-|                             -||-    : :: :::    :     :   : :      -||
              ||-| Github.Com/PyMmdrza         -||-  PrivateKey Rich Wallet Cracker   -||
-             ||-| PythonWithMmdrza.Medium.Com -||-                                   -||
+             ||-|                             -||-                                   -||
              ||-----------------------------------------------------------------------||
-             ||-|  Donate BTC Address Wallet  => 16p9y6EstGYcnofGNvUJMEGKiAWhAr1uR8  -||
+             ||-|  Donate BTC Address Wallet  => 1MMDRZAcM6dzmdMUSV8pDdAPDFpwzve9Fc  -||
              ||=======================================================================||
 -----------------------------------------------------------------------------------------------------------------
 '''
 # ============================================================================================
 
+def getRandomHexString(length: int = 64) -> str:
+    letters_and_digits = string.hexdigits.lower()
+    return ''.join(random.choice(letters_and_digits) for i in range(length))
 r = 1
 cores = 8
-
 
 
 def seek(r):
@@ -38,17 +40,17 @@ def seek(r):
     z = 1
     w = 0
     while True:
-        hex64 = mHash()
-        PRIVATE_KEY: str = hex64
-        hdwallet: HDWallet = HDWallet(symbol=SYMBOL)
-        hdwallet.from_private_key(private_key=PRIVATE_KEY)
-        priv = hdwallet.private_key()
-        addr = hdwallet.p2pkh_address()
-        print(Fore.YELLOW,'Total Scan:',Fore.WHITE, str(z),Fore.YELLOW,'Winner Wallet:',Fore.GREEN, str(w), Fore.YELLOW, 'Checking Now ----- ETH Address', Fore.WHITE, str(addr), end='\r', flush=True)
+        hex64 = getRandomHexString(64)
+        priv = str(hex64)
+        hdwallet = Wallet(priv)
+        addr = hdwallet.get_address(coin="ethereum")
+        print(Fore.YELLOW, 'Total Scan:', Fore.WHITE, str(z), Fore.YELLOW, 'Winner Wallet:', Fore.GREEN, str(w),
+              Fore.YELLOW, 'Checking Now ----- ETH Address', Fore.WHITE, str(addr), end='\r', flush=True)
         z += 1
-        
+
         if addr in add:
-            print('Winning', Fore.GREEN, str(w), Fore.WHITE, str(z), Fore.YELLOW, 'Total Scan Checking ----- ETH Address =', Fore.GREEN, str(addr), end='\r')
+            print('Winning', Fore.GREEN, str(w), Fore.WHITE, str(z), Fore.YELLOW,
+                  'Total Scan Checking ----- ETH Address =', Fore.GREEN, str(addr), end='\r')
             w += 1
             z += 1
             f = open("EthereumRichWinnerWallet.txt", "a")
@@ -58,7 +60,6 @@ def seek(r):
             f.close()
             print('Winner information Saved On text file = ADDRESS ', str(addr))
             continue
-        
 
 
 seek(r)
