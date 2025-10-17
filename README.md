@@ -2,10 +2,7 @@
 
 Private Key Finder Etherem From Rich Wallet List 
 
-**first install all package's after download hexer.py and running program on consol or terminal.
-this version without synce database etherscan an node , for use all in one can use pro version.** [Pro Version](https://wp.me/pdw95J-9b)
-
-
+**this version without synce database etherscan an node , for use all in one can use pro version.** [Pro Version](https://mmdrza.com/ethereum-rich-wallet-private-key-finder-v2/)
 
 ----
 
@@ -23,12 +20,12 @@ For Buy Complate This Source and Data List
 
 
 
-Telegram : `t.me/MrPyMmdrza`
+Telegram : `t.me/Mr1Mmdrza`
 
 ---
 First Install This Package's :
 ```
-pip install hdwallet
+pip install libcrypto
 pip install colorama
 ```
 
